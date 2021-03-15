@@ -39,5 +39,9 @@ resource "aws_security_group" "build" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+    }
   }
-  }
+
+output "instance_ips" {
+  value = aws_instance.build.public_ip
+}
