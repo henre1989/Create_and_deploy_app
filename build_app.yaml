@@ -8,15 +8,11 @@
       add_host:
         hostname: "{{ host_build }}"
         groups: build
-#        ansible_ssh_private_key_file: /var/lib/jenkins/.aws/tf-key.pem
 
-
-#    - name: Add all instance public IPs to host group docker_run
-#      add_host:
-#        hostname: "{{ host_build }}"
-#        groups: docker_run
-#        ansible_ssh_private_key_file: /var/lib/jenkins/.aws/tf-key.pem
-
+    - name: Add all instance public IPs to host group docker_run
+      add_host:
+        hostname: "{{ host_run_app }}"
+        groups: docker_run
 
 - name: build instance
   hosts: build
