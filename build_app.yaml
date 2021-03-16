@@ -6,7 +6,7 @@
 
     - name: Add all instance public IPs to host group build
       add_host:
-        hostname: "{{host_build}}"
+        hostname: "{{ host_build }}"
         groups: build
 #        ansible_ssh_private_key_file: /var/lib/jenkins/.aws/tf-key.pem
 
