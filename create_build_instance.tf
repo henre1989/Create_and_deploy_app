@@ -42,11 +42,11 @@ resource "aws_security_group" "build" {
     }
   }
 
-output "instance_ips" {
+output "instance_ips_build" {
   value = aws_instance.build.public_ip
 }
 
-resource "aws_instance" "Run_app" {
+resource "aws_instance" "run_app" {
   ami           = "ami-08962a4068733a2b6"
   instance_type = "t2.micro"
   vpc_security_group_ids = [aws_security_group.run_app.id]
@@ -87,5 +87,8 @@ resource "aws_security_group" "run_app" {
   tags = {
     Name = "Run_app"
   }
+}
 
+output "instance_ips_run" {
+  value = aws_instance.run_app.public_ip
 }
