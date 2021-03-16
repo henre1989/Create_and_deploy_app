@@ -45,3 +45,47 @@ resource "aws_security_group" "build" {
 output "instance_ips" {
   value = aws_instance.build.public_ip
 }
+
+resource "aws_instance" "Run_app" {
+  ami           = "ami-08962a4068733a2b6"
+  instance_type = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.run_app.id]
+  key_name = "tf-key"
+tags = {
+    Name = "run_app_server"
+  }
+}
+
+resource "aws_security_group" "run_app" {
+  name        = "Running Server Security Group"
+  description = "Running Server Security Group"
+
+
+  ingress {
+    description = "tomcat ports"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "Run_app"
+  }
+
+}
