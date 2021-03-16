@@ -65,33 +65,33 @@
        push: yes
        source: build
 
-#- name: Run app in docker
-#  hosts: docker_run
-#  remote_user: ubuntu
-#  become: yes
-#  tasks:
-#    - name: update repository
-#      apt:
-#       update_cache: yes
-#    - name: Ensure docker install
-#      apt:
-#       name: docker.io
-#       state: present
-#    - name: Ensure python3-pip is install
-#      apt:
-#       name: python3-pip
-#       state: present
-#    - name: Ensure Docker SDK for Python is install
-#      pip:
-#       name: docker
-#       state: present
-#    - name: Ensure PyYAML is install
-#      pip:
-#       name: PyYAML
-#       state: present
-#    - name: Ensure docker container is run
-#      docker_container:
-#       name: java_app
-#       image: henre1989/java_app:v1
-#       published_ports: 8080:8080
-#       state: started
+- name: Run app in docker
+  hosts: docker_run
+  remote_user: ubuntu
+  become: yes
+  tasks:
+    - name: update repository
+      apt:
+       update_cache: yes
+    - name: Ensure docker install
+      apt:
+       name: docker.io
+       state: present
+    - name: Ensure python3-pip is install
+      apt:
+       name: python3-pip
+       state: present
+    - name: Ensure Docker SDK for Python is install
+      pip:
+       name: docker
+       state: present
+    - name: Ensure PyYAML is install
+      pip:
+       name: PyYAML
+       state: present
+    - name: Ensure docker container is run
+      docker_container:
+       name: java_app
+       image: henre1989/java_app:v1
+       published_ports: 8080:8080
+       state: started
